@@ -25,7 +25,7 @@ SECRET_KEY = '5u3_0$dn24l(s#dtqfwgw8&t^as)^of8(3gxv((($r3+n!%(ye'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', ]
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.xiaohuadetaotao.site']
 
 
 # Application definition
