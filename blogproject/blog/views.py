@@ -2,7 +2,7 @@ import markdown
 from django.shortcuts import render, get_object_or_404
 
 from comments.forms import CommentForm
-from .models import Post, Category, Tag
+from .models import Post, Category
 
 
 def index(request):
@@ -12,6 +12,10 @@ def index(request):
 
 def detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
+
+    # 增加阅读量
+    post.increase_views()
+
     post.body = markdown.markdown(post.body,
                                   extensions=[
                                       'markdown.extensions.extra',
