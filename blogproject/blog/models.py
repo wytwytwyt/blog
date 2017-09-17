@@ -1,6 +1,8 @@
+import markdown
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.utils.html import strip_tags
 # Create your models here.
 
 
@@ -22,10 +24,10 @@ class Tag(models.Model):
 
 
 class Post(models.Model):
-    # title
+    # 标题
     title = models.CharField(max_length=70)
 
-    # body
+    # 正文
     body = models.TextField()
 
     # 创建时间及最后修改时间
@@ -46,6 +48,17 @@ class Post(models.Model):
 
     # 阅读量
     views = models.PositiveIntegerField(default=0)
+
+    def save(self, *args, **kwargs):
+        if not self.excerpt:
+            md = markdown.Markdown(extensions=[
+                'markdown.extensions.extra',
+                'markdown.extensions.codehilite',
+            ])
+            
+            self.excerpt = strip_tags(md.convert(self.body))[:54]
+        
+        super(Post, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title
