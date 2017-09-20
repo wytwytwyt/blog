@@ -1,0 +1,5 @@
+.idea/
+*.pyc
+fabfile.py
+db.sqllite3
+
